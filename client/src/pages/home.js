@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../utils/auth_context";
 
 const Home = () => {
-  return <div>Home</div>;
+  const context = useContext(AuthContext);
+  return (
+    <div>
+      <button onClick={context.LogOut}>GGG</button> Home
+    </div>
+  );
 };
 
 export default Home;
