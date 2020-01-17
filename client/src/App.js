@@ -1,10 +1,13 @@
 import React from "react";
 import Routes from "./routes";
+import AuthProvider from "./auth/auth_provider";
 
 const App = () => {
   return (
     <div className="App">
-      <Routes />
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
     </div>
   );
 };
