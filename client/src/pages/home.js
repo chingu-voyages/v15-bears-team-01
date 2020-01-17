@@ -5,7 +5,13 @@ const Home = () => {
   const context = useContext(AuthContext);
   return (
     <div>
-      <button onClick={context.LogOut}>GGG</button> Home
+      <div>
+        <button onClick={context.LogOut}>Logout</button>
+      </div>
+      <div>
+        <button onClick={() => console.log(context)}>State</button>
+      </div>
+      {context.state.isAuthenticated ? <p> Logged In </p> : <p> Logged Out </p>}
     </div>
   );
 };

@@ -40,8 +40,11 @@ const Auth = () => {
 
     let sendtokenToServer = token => {
       axios
-        .post("http://localhost:3000/sendtoken", { token })
+        .post("http://localhost:5000/sendtoken", { token })
         .then(res => sendProfiletoContext(res.data))
+        .then(history.push("/"))
+        // automatic redirect not working idk why
+        // .then(setTimeout(history.push("/profile"), 500))
         .catch(err => console.log(err));
     };
 
@@ -59,7 +62,6 @@ const Auth = () => {
       };
 
       context.saveUser(user);
-      history.replace("/profile");
     };
   };
 

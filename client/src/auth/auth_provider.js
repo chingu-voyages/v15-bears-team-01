@@ -4,16 +4,10 @@ import { authReducer, initialState } from "../store/reducers/auth_reducer";
 import { saveUserAction, Logout } from "../store/actions/actions";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { FIREBASE_API_KEY, FIREBASE_DOMAIN } from "../keys";
-
-// const config = {
-//   apiKey: process.env.FIREBASE_API_KEY,
-//   authDomain: process.env.FIREBASE_DOMAIN
-// };
 
 const config = {
-  apiKey: FIREBASE_API_KEY,
-  authDomain: FIREBASE_DOMAIN
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN
 };
 
 firebase.initializeApp(config);
