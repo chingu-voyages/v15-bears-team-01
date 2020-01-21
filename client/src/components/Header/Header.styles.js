@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { NavLink as Link } from 'react-router-dom';
 
 const Container = styled.header`
   width: 100vw;
@@ -29,13 +28,17 @@ const Navigation = styled.nav`
     justify-content: space-between;
     align-items: center;
   }
+
+  li > div, li > a {
+    margin: 0 36px;
+    text-decoration: none;
+    color: ${props => props.theme.linkText};
+    font-size: 1.6em;
+  }
 `;
 
-const NavItem = styled(Link)`
-  margin: 0 36px;
-  text-decoration: none;
-  color: ${props => props.theme.linkText};
-  font-size: 1.6em;
+const NavItem = styled.div`
+  cursor: pointer;
 `;
 
 const StyledHeader = {
