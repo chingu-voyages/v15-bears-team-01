@@ -3,10 +3,10 @@ import {
   BrowserRouter as Router,
   Redirect,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
+import Header from './Header';
 import Home from "./pages/home";
 import Profile from "./pages/profile";
 import About from "./pages/about";
@@ -34,22 +34,7 @@ const Routes = () => {
   return (
     <Router history={history}>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </nav>
+        <Header />
 
         <Switch>
           <Route path="/about" component={About} />
