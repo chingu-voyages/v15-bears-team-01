@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Container = styled.header`
   width: 100vw;
@@ -29,7 +29,8 @@ const Navigation = styled.nav`
     align-items: center;
   }
 
-  li > div, li > a {
+  li > div,
+  li > a {
     margin: 0 36px;
     text-decoration: none;
     color: ${props => props.theme.linkText};
