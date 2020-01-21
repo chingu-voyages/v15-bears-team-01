@@ -6,14 +6,14 @@ import {
   Route
 } from "react-router-dom";
 
-import Header from './Header';
-import Home from "./pages/home";
-import Profile from "./pages/profile";
-import About from "./pages/about";
-import Login from "./pages/login";
+import Header from "../components/Header";
+import Home from "../pages/home";
+import Profile from "../pages/profile";
+import About from "../pages/about";
+import Login from "../pages/login";
 
-import AuthContext from "./utils/auth_context";
-import history from "./utils/history";
+import AuthContext from "../utils/auth_context";
+import history from "../utils/history";
 
 const Routes = () => {
   const context = useContext(AuthContext);
