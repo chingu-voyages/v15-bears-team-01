@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import { Link } from "react-router-dom";
 import AuthContext from "../utils/auth_context";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
