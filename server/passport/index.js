@@ -2,7 +2,7 @@ require("dotenv").config();
 const passport = require("passport");
 const ExtractJWT = require("passport-jwt").ExtractJwt;
 const JWTStrategy = require("passport-jwt").Strategy;
-const db = require("../db.js");
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const setToken = user => {
@@ -10,7 +10,6 @@ const setToken = user => {
     expiresIn: "12h"
   };
   let secret = process.env.AUTH_SECRET;
-
   return jwt.sign(user, secret);
 };
 
@@ -22,25 +21,19 @@ passport.use(
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.AUTH_SECRET
     },
-    (jwtPayload, cb) => {
-      let id = [jwtPayload];
-      let query = `SELECT *
-                   FROM users 
-                   WHERE id=$1`;
-
-      //check if id exists then allow endpoint
-      let callback = (err, user) => {
-        if (err) {
-          return cb(err, false);
+    async (jwtPayload, done) => {
+      try {
+        let id = [jwtPayload];
+        console.log(id);
+        //check if id exists then allow endpoint
+        const user = await User.query().where("id", id);
+        if (user) {
+          return done(null, jwtPayload);
         }
-        if (user.rows.length === 0) {
-          return cb(null, false);
-        }
-        if (user.rows.length != 0) {
-          return cb(null, jwtPayload);
-        }
-      };
-      db.query(query, id, callback);
+        return done(null, false);
+      } catch (error) {
+        return done(error, false);
+      }
     }
   )
 );
