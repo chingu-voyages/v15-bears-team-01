@@ -3,8 +3,8 @@ const db = require("../db.js");
 const requireAuth = require("./passport_config").requireAuth;
 const setToken = require("./passport_config").setToken;
 
-const firebase = require("firebase-admin");
-const admin = firebase.initializeApp();
+// const firebase = require("firebase-admin");
+// const admin = firebase.initializeApp();
 
 const express = require("express");
 const router = express.Router();
@@ -54,7 +54,6 @@ router.post("/sendtoken", (req, res) => {
       //send back user id after signup
       if (q_res.rows[0]) {
         let id = q_res.rows[0].id;
-
         //jwt token login after signup
         res.send({ token: setToken(id) });
       }

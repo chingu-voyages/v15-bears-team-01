@@ -13,7 +13,6 @@ import About from "../pages/about";
 import Login from "../pages/login";
 
 import AuthContext from "../utils/auth_context";
-import history from "../utils/history";
 
 const Routes = () => {
   const context = useContext(AuthContext);
@@ -32,7 +31,7 @@ const Routes = () => {
   );
 
   return (
-    <Router history={history}>
+    <Router>
       <div>
         <Header />
 
