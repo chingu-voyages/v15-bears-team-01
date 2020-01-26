@@ -5,6 +5,9 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import history from "../utils/history";
 
+// var url = process.env.REACT_APP_SERVER_URL;
+// console.log(url);
+
 const Auth = () => {
   const context = useContext(AuthContext);
 
@@ -38,8 +41,10 @@ const Auth = () => {
       .then(token => sendtokenToServer(token));
 
     let sendtokenToServer = token => {
+      var url = process.env.REACT_APP_SERVER_URL;
+
       axios
-        .post("http://localhost:5001/auth/sendToken", { token })
+        .post(`${url}/auth/sendToken`, { token })
         .then(res => sendProfiletoContext(res.data))
         .then(history.push("/"))
         // automatic redirect not working idk why
