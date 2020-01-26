@@ -19,6 +19,9 @@ const Header = () => {
             <li>
               <Link to="/about">About</Link>
             </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
             {context.state.isAuthenticated && (
               <li>
                 <Link to="/profile">Profile</Link>
