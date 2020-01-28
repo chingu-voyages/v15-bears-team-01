@@ -11,9 +11,9 @@ import Home from "../pages/home";
 import Profile from "../pages/profile";
 import About from "../pages/about";
 import Login from "../pages/login";
+import EditJob from "../pages/editjob";
 
 import AuthContext from "../utils/auth_context";
-import history from "../utils/history";
 
 const Routes = () => {
   const context = useContext(AuthContext);
@@ -32,17 +32,20 @@ const Routes = () => {
   );
 
   return (
-    <Router history={history}>
+    <Router>
       <div>
         <Header />
 
         <Switch>
           <Route path="/about" component={About} />
-          <PrivateRoute
+          {/* <PrivateRoute
             path="/profile"
             auth={context.state.isAuthenticated}
             component={Profile}
-          />
+          /> */}
+          <Route path="/profile" component={Profile} />
+          <Route path="/editjob/:id" component={EditJob} />
+
           <Route path="/login" component={Login} />
           <Route path="/" component={Home} />
         </Switch>

@@ -22,6 +22,16 @@ module.exports = {
   //   if (userExists) {
   //   }
   // },
+  //GET JOB
+  getJob: async (req, res) => {
+    const { id } = req.params;
+
+    getJobs = await Job.query()
+      .select("*")
+      .where("user_id", id);
+
+    res.status(200).json(getJobs);
+  },
   //ADD JOB
   addJob: async (req, res) => {
     //Save the user's id associated with this job
@@ -57,7 +67,7 @@ module.exports = {
   },
   updateJob: async (req, res) => {
     const { id } = req.params;
-
+    console.log(req.body);
     //Save the user's id associated with this job
     const user_id = req.body.user_id;
     //Checking if the values are empty, if so we save it as an empty strings
@@ -95,6 +105,7 @@ module.exports = {
   //DELETE JOB
   deleteJob: async (req, res) => {
     const { id } = req.params;
+    console.log(req.body);
     //GET the user's id associated with this job
     const user_id = req.body.user_id;
     //Delete Job for a specific user and job
