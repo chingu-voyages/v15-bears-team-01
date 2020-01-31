@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import AuthContext from "../../utils/auth_context";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import styles from "./addjobform.module.css";
@@ -29,7 +28,6 @@ const user = {
 const AddJobForm = () => {
   const [loading, setLoading] = useState(false);
   const [resMessage, setresMessage] = useState(null);
-  const context = useContext(AuthContext);
 
   const handleSubmit = values => {
     setLoading(true);
@@ -70,6 +68,69 @@ const AddJobForm = () => {
       .catch(err => handleErr(err));
   };
 
+  let formFields = [
+    {
+      name: "position",
+      labelInnerText: "Position",
+      initialValue: "",
+      type: "input"
+    },
+    {
+      name: "company",
+      labelInnerText: "Company",
+      initialValue: "",
+      type: "input"
+    },
+    {
+      name: "status",
+      labelInnerText: "Status",
+      initialValue: "",
+      type: "select"
+    },
+    {
+      name: "date_applied",
+      labelInnerText: "Date Applied",
+      initialValue: "",
+      type: "date"
+    },
+    {
+      name: "point_of_contact",
+      labelInnerText: "Point of Contact",
+      initialValue: "",
+      type: "input"
+    },
+    {
+      name: "poc_email",
+      labelInnerText: "Point of Contact Email",
+      initialValue: "",
+      type: "email"
+    },
+    {
+      name: "poc_phone",
+      labelInnerText: "Point of Contact Phone",
+      initialValue: "",
+      type: "tel"
+    },
+    {
+      name: "location",
+      labelInnerText: "Location",
+      initialValue: "",
+      type: "input"
+    },
+    {
+      name: "notes",
+      labelInnerText: "Notes",
+      initialValue: "",
+      type: "textarea"
+    }
+  ];
+
+  let formikInitialValues = {};
+
+  formFields.forEach(
+    field => (formikInitialValues[field.name] = field.initialValue)
+  );
+
   return (
     <div>
       {loading && (
@@ -80,7 +141,7 @@ const AddJobForm = () => {
       )}
       <h3>{resMessage}</h3>
       <Formik
-        initialValues={{ position: "" }}
+        initialValues={formikInitialValues}
         validationSchema={AddJobSchema}
         onSubmit={handleSubmit}
       >
@@ -94,18 +155,24 @@ const AddJobForm = () => {
           isSubmitting
         }) => (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <label htmlFor="position">Position:</label>
-            <input
-              className={styles.form_input}
-              name="position"
-              id="position"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.position}
-            />
-            {errors.position && touched.position && (
-              <span className={styles.error_text}>{errors.position} </span>
-            )}
+            {formFields.map((field, index) => (
+              <React.Fragment key={index}>
+                <label htmlFor={field.name}>{field.labelInnerText}</label>
+                <input
+                  className={styles.form_input}
+                  name={field.name}
+                  id={field.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values[field.name]}
+                />
+                {errors[field.name] && touched[field.name] && (
+                  <span className={styles.error_text}>
+                    {errors[field.name]}
+                  </span>
+                )}
+              </React.Fragment>
+            ))}
             <button
               type="submit"
               className={styles.form_button}
