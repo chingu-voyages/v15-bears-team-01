@@ -68,6 +68,8 @@ const AddJobForm = () => {
       .catch(err => handleErr(err));
   };
 
+  // the component takes this array and creates <input> components for data entry.
+  // in the next pull request, AddJobForm will create <select> and datepicker elements depending on the 'type' key below.
   let formFields = [
     {
       name: "position",
@@ -125,6 +127,7 @@ const AddJobForm = () => {
     }
   ];
 
+  // generate default values for Formik
   let formikInitialValues = {};
 
   formFields.forEach(
