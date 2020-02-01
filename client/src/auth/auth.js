@@ -40,7 +40,7 @@ const Auth = () => {
 
     let sendtokenToServer = token => {
       axios
-        .post("http://localhost:5000/sendtoken", { token })
+        .post("http://localhost:5003/auth/sendtoken", { token })
         .then(res => sendProfiletoContext(res.data))
         .then(history.push("/"))
         // automatic redirect not working idk why

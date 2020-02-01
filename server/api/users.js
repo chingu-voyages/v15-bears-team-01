@@ -10,10 +10,7 @@ router.post("/users/addJob", userController.addJob);
 router.put("/users/updateJob/:id", userController.updateJob);
 //Delete Job
 router.delete("/users/deleteJob/:id", userController.deleteJob);
-
 //Update User
 router.put("/users/updateUser/:id", userController.updateUser);
-
-// router.post("/users", (req, res) => {});
 
 module.exports = router;

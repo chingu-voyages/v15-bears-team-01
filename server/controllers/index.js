@@ -55,6 +55,7 @@ module.exports = {
 
     res.status(200).json(savedJob);
   },
+  
   updateJob: async (req, res) => {
     const { id } = req.params;
 
