@@ -16,17 +16,15 @@ const AddJobSchema = Yup.object().shape({
     .min(3, "Company name must be at least 3 characters.")
     .max(50, "Company name has too many characters.")
     .required("Company name required!"),
-  status: Yup.string()
-    .required("Job status must be Green, Red, or Yellow."),
-  date_applied: Yup.date("Application date must be a valid date.")
-    .required("Date of application required!"),
+  status: Yup.string().required("Job status must be Green, Red, or Yellow."),
+  date_applied: Yup.date("Application date must be a valid date.").required(
+    "Date of application required!"
+  ),
   point_of_contact: Yup.string(),
-  poc_email: Yup.string()
-    .email("Please enter a valid e-mail address."),
+  poc_email: Yup.string().email("Please enter a valid e-mail address."),
   poc_phone: Yup.string(),
   location: Yup.string(),
-  notes: Yup.string()
-    .max(255, "Too many characters.")
+  notes: Yup.string().max(255, "Too many characters.")
 });
 
 const user = {
@@ -47,8 +45,6 @@ const AddJobForm = () => {
       ...values
     };
 
-    console.log(data);
-
     let handleRes = res => {
       setLoading(false);
       console.log(res);
@@ -68,7 +64,6 @@ const AddJobForm = () => {
   };
 
   // the component takes this array and creates <input> components for data entry.
-  // in the next pull request, AddJobForm will create <select> and datepicker elements depending on the 'type' key below.
   let formFields = [
     {
       name: "position",
@@ -162,8 +157,9 @@ const AddJobForm = () => {
             {formFields.map((field, index) => (
               <React.Fragment key={index}>
                 <label htmlFor={field.name}>{field.labelInnerText}</label>
+                {/* Syntax below means that the switch function is defined, then immediately executed. */}
                 {(() => {
-                  switch(field.type) {
+                  switch (field.type) {
                     case "input":
                       return (
                         <input
