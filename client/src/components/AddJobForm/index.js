@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import styles from "./addjobform.module.css";
 import axios from "axios";
+import DatePicker from "react-datepicker";
+
+import styles from "./addjobform.module.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddJobSchema = Yup.object().shape({
   position: Yup.string()
-    .min(3, "Position must be at least 3 characters")
-    .max(50, "Position Name Too Long")
-    .required("Position Required"),
-  company: Yup.string(),
-  status: Yup.string(),
-  date_applied: Yup.string(),
+    .min(3, "Position must be at least 3 characters.")
+    .max(50, "Position name has too many characters.")
+    .required("Job position required!"),
+  company: Yup.string()
+    .min(3, "Company name must be at least 3 characters.")
+    .max(50, "Company name has too many characters.")
+    .required("Company name required!"),
+  status: Yup.string()
+    .required("Job status must be Green, Red, or Yellow."),
+  date_applied: Yup.date("Application date must be a valid date.")
+    .required("Date of application required!"),
   point_of_contact: Yup.string(),
-  poc_email: Yup.string(),
+  poc_email: Yup.string()
+    .email("Please enter a valid e-mail address."),
   poc_phone: Yup.string(),
   location: Yup.string(),
   notes: Yup.string()
+    .max(255, "Too many characters.")
 });
 
 const user = {
@@ -31,29 +41,18 @@ const AddJobForm = () => {
 
   const handleSubmit = values => {
     setLoading(true);
-    // const data = {
-    //   position,
-    //   company,
-    //   status,
-    //   date_applied,
-    //   point_of_contact,
-    //   poc_email,
-    //   poc_phone,
-    //   location,
-    //   notes
-    // };
-
-    let position = values.position;
 
     let data = {
       user_id: user.id,
-      position
+      ...values
     };
+
+    console.log(data);
 
     let handleRes = res => {
       setLoading(false);
       console.log(res);
-      setresMessage("Successfully Submited Job");
+      setresMessage("Successfully Submitted Job");
     };
 
     let handleErr = err => {
@@ -86,13 +85,14 @@ const AddJobForm = () => {
     {
       name: "status",
       labelInnerText: "Status",
-      initialValue: "",
-      type: "select"
+      initialValue: "Red",
+      type: "select",
+      options: ["Green", "Yellow", "Red"]
     },
     {
       name: "date_applied",
       labelInnerText: "Date Applied",
-      initialValue: "",
+      initialValue: new Date(),
       type: "date"
     },
     {
@@ -105,13 +105,13 @@ const AddJobForm = () => {
       name: "poc_email",
       labelInnerText: "Point of Contact Email",
       initialValue: "",
-      type: "email"
+      type: "input"
     },
     {
       name: "poc_phone",
       labelInnerText: "Point of Contact Phone",
       initialValue: "",
-      type: "tel"
+      type: "input"
     },
     {
       name: "location",
@@ -155,20 +155,70 @@ const AddJobForm = () => {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
+          isSubmitting,
+          setFieldValue
         }) => (
           <form className={styles.form} onSubmit={handleSubmit}>
             {formFields.map((field, index) => (
               <React.Fragment key={index}>
                 <label htmlFor={field.name}>{field.labelInnerText}</label>
-                <input
-                  className={styles.form_input}
-                  name={field.name}
-                  id={field.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values[field.name]}
-                />
+                {(() => {
+                  switch(field.type) {
+                    case "input":
+                      return (
+                        <input
+                          className={styles.form_input}
+                          name={field.name}
+                          id={field.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values[field.name]}
+                        />
+                      );
+
+                    case "date":
+                      return (
+                        <DatePicker
+                          selected={values[field.name]}
+                          name={field.name}
+                          id={field.name}
+                          onChange={date => setFieldValue(field.name, date)}
+                        />
+                      );
+
+                    case "select":
+                      const options = field.options.map((option, index) => (
+                        <option value={option} key={index}>
+                          {option}
+                        </option>
+                      ));
+
+                      return (
+                        <select
+                          id={field.name}
+                          name={field.name}
+                          value={values[field.name]}
+                          onChange={handleChange}
+                        >
+                          {options}
+                        </select>
+                      );
+
+                    case "textarea":
+                      return (
+                        <textarea
+                          id={field.name}
+                          name={field.name}
+                          value={values[field.name]}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      );
+
+                    default:
+                      return <>Error rendering form input.</>;
+                  }
+                })()}
                 {errors[field.name] && touched[field.name] && (
                   <span className={styles.error_text}>
                     {errors[field.name]}
