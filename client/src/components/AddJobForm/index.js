@@ -45,6 +45,8 @@ const AddJobForm = () => {
       ...values
     };
 
+    console.log(data);
+
     let handleRes = res => {
       setLoading(false);
       console.log(res);
@@ -67,7 +69,7 @@ const AddJobForm = () => {
   let formFields = [
     {
       name: "position",
-      labelInnerText: "Position",
+      labelInnerText: "Job Position",
       initialValue: "",
       type: "input"
     },
@@ -78,11 +80,10 @@ const AddJobForm = () => {
       type: "input"
     },
     {
-      name: "status",
-      labelInnerText: "Status",
-      initialValue: "Red",
-      type: "select",
-      options: ["Green", "Yellow", "Red"]
+      name: "location",
+      labelInnerText: "Location",
+      initialValue: "",
+      type: "input"
     },
     {
       name: "date_applied",
@@ -91,8 +92,15 @@ const AddJobForm = () => {
       type: "date"
     },
     {
+      name: "status",
+      labelInnerText: "Application Status",
+      initialValue: "Red",
+      type: "select",
+      options: ["Red", "Yellow", "Green"]
+    },
+    {
       name: "point_of_contact",
-      labelInnerText: "Point of Contact",
+      labelInnerText: "Point of Contact Name",
       initialValue: "",
       type: "input"
     },
@@ -105,12 +113,6 @@ const AddJobForm = () => {
     {
       name: "poc_phone",
       labelInnerText: "Point of Contact Phone",
-      initialValue: "",
-      type: "input"
-    },
-    {
-      name: "location",
-      labelInnerText: "Location",
       initialValue: "",
       type: "input"
     },
@@ -156,7 +158,7 @@ const AddJobForm = () => {
           <form className={styles.form} onSubmit={handleSubmit}>
             {formFields.map((field, index) => (
               <React.Fragment key={index}>
-                <label htmlFor={field.name}>{field.labelInnerText}</label>
+                <label className={styles.input_label} htmlFor={field.name}>{field.labelInnerText}</label>
                 {/* Syntax below means that the switch function is defined, then immediately executed. */}
                 {(() => {
                   switch (field.type) {
@@ -175,6 +177,7 @@ const AddJobForm = () => {
                     case "date":
                       return (
                         <DatePicker
+                          className={styles.form_input + ' ' + styles.form_date_picker}
                           selected={values[field.name]}
                           name={field.name}
                           id={field.name}
@@ -215,11 +218,13 @@ const AddJobForm = () => {
                       return <>Error rendering form input.</>;
                   }
                 })()}
-                {errors[field.name] && touched[field.name] && (
-                  <span className={styles.error_text}>
-                    {errors[field.name]}
-                  </span>
-                )}
+                <div className={styles.error_container}>
+                  {errors[field.name] && touched[field.name] && (
+                    <span className={styles.error_text}>
+                      {errors[field.name]}
+                    </span>
+                  )}
+                </div>
               </React.Fragment>
             ))}
             <button
