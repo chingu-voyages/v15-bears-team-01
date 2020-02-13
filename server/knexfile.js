@@ -1,6 +1,7 @@
 require("dotenv").config();
 
-// Update with your config settings. 
+console.log("KNEX FILE", process.env.DATABASE_HEROKU);
+// Update with your config settings.
 module.exports = {
   development: {
     client: "pg",
@@ -16,13 +17,14 @@ module.exports = {
 
   test: {
     client: "pg",
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_HEROKU,
     migrations: {
       directory: "./database/migrations"
     },
     seeds: {
-      directory: "./database/seeds/test"
+      directory: "./database/seeds/dev"
     },
+
     useNullAsDefault: true
   },
 
