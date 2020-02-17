@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600,700&display=swap");
+
+/* 
+  Landing
+*/
+
+.landing {
+  background-color: #6d6afc;
+  color: whitesmoke;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+}
+
+.callToAction {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  color: whitesmoke;
+  justify-content: center;
+  align-items: center;
+}
+
+.callToAction h1 {
+  font-size: 8rem;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+.callToAction h4 {
+  margin-bottom: 65px;
+  font-weight: 300;
+}
+
+.getStarted {
+  border-radius: 100px;
+  background-color: #9fbaff;
+  padding: 15px 48px;
+  cursor: pointer;
+  border: none;
+  color: whitesmoke;
+  text-decoration: none;
+  transition: all 0.25s;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.getStarted:hover {
+  color: white;
+  background-color: navy;
+}
