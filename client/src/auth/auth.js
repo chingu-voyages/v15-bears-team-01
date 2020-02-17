@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import history from "../utils/history";
 
+import styles from "./login.module.css";
 // var url = process.env.REACT_APP_SERVER_URL;
 // console.log(url);
 
@@ -70,11 +71,18 @@ const Auth = () => {
   };
 
   return (
-    <div>
-      <StyledFirebaseAuth
-        uiConfig={uiConfig}
-        firebaseAuth={context.firebase.auth()}
-      />
+    <div className="container">
+      <div className="row">
+        <div className={`twelve columns ${styles.loginContainer}`}>
+          <div>
+            <h1>Login</h1>
+            <StyledFirebaseAuth
+              uiConfig={uiConfig}
+              firebaseAuth={context.firebase.auth()}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ import Profile from "../pages/profile";
 import About from "../pages/about";
 import Login from "../pages/login";
 import EditJob from "../pages/editjob";
+import LandingPage from "../pages/landing";
 
 import AuthContext from "../utils/auth_context";
 
@@ -38,16 +39,17 @@ const Routes = () => {
 
         <Switch>
           <Route path="/about" component={About} />
-          {/* <PrivateRoute
+          <PrivateRoute
             path="/profile"
             auth={context.state.isAuthenticated}
             component={Profile}
-          /> */}
-          <Route path="/profile" component={Profile} />
+          />
+          {/* <Route path="/profile" component={Profile} /> */}
           <Route path="/editjob/:id" component={EditJob} />
 
           <Route path="/login" component={Login} />
-          <Route path="/" component={Home} />
+          <Route path="/" component={LandingPage} />
+          <Route path="/home" component={Home} />
         </Switch>
       </div>
     </Router>
