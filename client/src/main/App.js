@@ -8,8 +8,11 @@ import AuthProvider from "../auth/auth_provider";
 const GlobalStyles = createGlobalStyle`
 ${resetStyles}
 
-  @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600,700&display=swap");
-  
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900&display=swap');
+ 
+  .border{
+    border: 5px solid black;
+  }
   *,*:before,*:after {
       margin:0;
       padding:0;
@@ -18,11 +21,12 @@ ${resetStyles}
   html {
     font-size: 62.5%;
   }
+
   body {
     font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
     line-height: 1.6;
     font-weight: 400;
-    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
+    font-family: 'Source Sans Pro', sans-serif;
       sans-serif;
     color: #222;
   }

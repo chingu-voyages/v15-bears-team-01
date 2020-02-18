@@ -47,7 +47,7 @@ const Auth = () => {
       axios
         .post(`${url}/auth/sendToken`, { token })
         .then(res => sendProfiletoContext(res.data))
-        .then(history.push("/"))
+        .then(history.push("/profile"))
         // automatic redirect not working idk why
         // .then(setTimeout(history.push("/profile"), 500))
         .catch(err => console.log(err));

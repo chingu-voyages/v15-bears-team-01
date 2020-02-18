@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./landingpage.module.css";
 
 const Landing = () => {
@@ -10,9 +11,9 @@ const Landing = () => {
             <div>
               <h1>Jobseekr</h1>
               <h4>An Easy Way To Keep Track of your Job Applications</h4>
-              <a href="#" className={styles.getStarted}>
+              <Link to="/login" className={styles.getStarted}>
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
         </div>
