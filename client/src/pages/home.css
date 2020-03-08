@@ -1,32 +1,30 @@
-
-.home-vector {
+@media screen and (min-width: 1px) {
+  .home-vector {
     width: 100%;
     height: 100%;
-}
+  }
 
-.home-row1 {
+  .home-row1 {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-}
+  }
 
-.home-image {
+  .home-image {
     width: 80%;
     height: 80%;
-}
+  }
 
-.home-col1 {
+  .home-col1 {
     display: flex;
     width: 40%;
     flex-direction: column;
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    flex-grow: 33%;
-}
+    padding-top: 150px;
+    padding-bottom: 150px;
+  }
 
-.home-col2 {
+  .home-col2 {
     display: flex;
     width: 60%;
     flex-direction: row;
@@ -36,4 +34,37 @@
     padding-bottom: 10px;
     flex-grow: 50%;
     margin: auto;
+  }
+
+  .card-row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border: black 1px;
+    width: 30%;
+    height: 200px;
+    background-color: aqua;
+  }
+
+  .card-wave {
+    width: 100%;
+    height: 50%;
+    align-self: flex-end;
+    margin-bottom: -57px;
+  }
+
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
 }
