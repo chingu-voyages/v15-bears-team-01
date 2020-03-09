@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import JobList from "../JobList";
+import styles from "./getjobs.module.css";
 
 const user = {
   email: "mock@email.com",
@@ -32,15 +34,29 @@ const GetJobs = () => {
   }, []);
 
   return (
-    <div>
-      <br />
-      <br />
-      {jobs
-        ? jobs.map(job => {
-            return <JobList job={job} key={jobs.id} />;
-          })
-        : null}
-    </div>
+    <Fragment>
+      <div class="container">
+        <div class="row">
+          <div class={`twelve columns ${styles.jobContainer}`}>
+            <div class={`nine columns ${styles.jobList}`}>
+              <div>
+                <h5>{`${jobs ? jobs.length : 0} Total Jobs`}</h5>
+              </div>
+              {jobs
+                ? jobs.map(job => {
+                    return <JobList job={job} key={jobs.id} />;
+                  })
+                : null}
+              <div class={styles.addJob}>
+                <Link to="/add-job" class={styles.addJobsButton}>
+                  Add Job
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Fragment>
   );
 };
 

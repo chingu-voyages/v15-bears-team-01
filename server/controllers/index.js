@@ -75,7 +75,7 @@ module.exports = {
     const position = req.body.position ? req.body.position : "";
     const location = req.body.location ? req.body.location : "";
     const point_of_contact = req.body.point_of_contact
-      ? req.body.person_of_contact
+      ? req.body.point_of_contact
       : "";
     const date_applied = req.body.date_applied ? req.body.date_applied : "";
     const status = req.body.status ? req.body.status : "";

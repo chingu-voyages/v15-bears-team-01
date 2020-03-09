@@ -4,6 +4,9 @@ import image from '../static/Man Reading a Book Illustration.jpg';
 import './home.css';
 import Footer from '../components/Footer';
 
+
+
+
 const Home = () => {
   const context = useContext(AuthContext);
 
