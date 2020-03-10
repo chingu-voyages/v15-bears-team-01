@@ -1,27 +1,48 @@
-import React, { useContext } from 'react';
-import AuthContext from '../utils/auth_context';
-import image from '../static/Man Reading a Book Illustration.jpg';
-import './home.css';
-import Footer from '../components/Footer';
-
-
-
+import React, { useContext } from "react";
+import AuthContext from "../utils/auth_context";
+import image from "../static/Man Reading a Book Illustration.jpg";
+import styles from "./home.module.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const context = useContext(AuthContext);
 
   return (
-    <div className="home-layout">
-      <div className="home-row1">
-        <div className="home-col1">
-          <h3> Easily Track All your Jobs Applications </h3> <p> Use our tool to keep track of all your job apps in one place </p> <button> Join today for free </button>{' '}
-        </div>
-        <div className="home-col2">
-          <img className="home-image" src={image} alt="" />
+    <div>
+      <div>
+        <div className={styles.landing}>
+          <div className={styles.container}>
+            <div>
+              <div className={styles.callToAction}>
+                <div>
+                  <h1>Jobseekr</h1>
+                  <h4>An Easy Way To Keep Track of your Job Applications</h4>
+                  <Link to="/login" className={styles.getStarted}>
+                    Get Started
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="home-row1">
-        <svg className="home-vector" viewBox="0 0 1440 306" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div className={styles.home_row1}>
+        <div className={styles.home_col1}>
+          <h3> Easily Track All your Jobs Applications </h3>
+          <p> Use our tool to keep track of all your job apps in one place </p>
+          <button> Join today for free </button>
+        </div>
+        <div className={styles.home_col2}>
+          <img className={styles.home_image} src={image} alt="" />
+        </div>
+      </div>
+      <div className={styles.home_row1}>
+        <svg
+          className={styles.home_vector}
+          viewBox="0 0 1440 306"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -30,11 +51,16 @@ const Home = () => {
           />
         </svg>
       </div>
-      <div className="card-row1">
-        <div className="card">
-          <div className="card-title">Card 1</div>
-          <div className="card-content">Card Content</div>
-          <svg className="card-wave" viewBox="0 0 256 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div className={styles.card_row1}>
+        <div className={styles.card}>
+          <div className={styles.card_title}>Card 1</div>
+          <div className={styles.card_content}>Card Content</div>
+          <svg
+            className={styles.card_wave}
+            viewBox="0 0 256 83"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -43,10 +69,15 @@ const Home = () => {
             />
           </svg>
         </div>
-        <div className="card">
-          <div className="card-title">Card 2</div>
-          <div className="card-content">Card Content</div>
-          <svg className="card-wave" viewBox="0 0 256 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className={styles.card}>
+          <div className={styles.card_title}>Card 2</div>
+          <div className={styles.card_content}>Card Content 2</div>
+          <svg
+            className={styles.card_wave}
+            viewBox="0 0 256 83"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -55,10 +86,15 @@ const Home = () => {
             />
           </svg>
         </div>
-        <div className="card">
-          <div className="card-title">Card 3</div>
-          <div className="card-content">Card Content</div>
-          <svg className="card-wave" viewBox="0 0 256 83" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className={styles.card}>
+          <div className={styles.card_title}>Card 3</div>
+          <div className={styles.card_content}>Card Content 3</div>
+          <svg
+            className={styles.card_wave}
+            viewBox="0 0 256 83"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               fillRule="evenodd"
               clipRule="evenodd"
@@ -68,7 +104,6 @@ const Home = () => {
           </svg>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

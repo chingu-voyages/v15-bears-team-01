@@ -1,9 +1,9 @@
-import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { reset as resetStyles } from "styled-reset";
+import React from 'react';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { reset as resetStyles } from 'styled-reset';
 
-import Routes from "./routes";
-import AuthProvider from "../auth/auth_provider";
+import Routes from './routes';
+import AuthProvider from '../auth/auth_provider';
 
 const GlobalStyles = createGlobalStyle`
 ${resetStyles}
@@ -315,9 +315,9 @@ there.
 `;
 
 const theme = {
-  white: "#fff",
-  dark: "navy",
-  linkText: "#fcfcfc"
+  white: '#fff',
+  dark: 'navy',
+  linkText: '#fcfcfc'
 };
 
 const App = () => {

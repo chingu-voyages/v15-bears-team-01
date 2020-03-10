@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import AuthContext from "../utils/auth_context";
-import jwt_decode from "jwt-decode";
-import axios from "axios";
-import history from "../utils/history";
+import React, { useContext } from 'react';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import AuthContext from '../utils/auth_context';
+import jwt_decode from 'jwt-decode';
+import axios from 'axios';
+import history from '../utils/history';
 
-import styles from "./login.module.css";
+import styles from './login.module.css';
 // var url = process.env.REACT_APP_SERVER_URL;
 // console.log(url);
 
@@ -13,8 +13,8 @@ const Auth = () => {
   const context = useContext(AuthContext);
 
   const uiConfig = {
-    credentialHelper: "none",
-    signInFlow: "popup",
+    credentialHelper: 'none',
+    signInFlow: 'popup',
     signInOptions: [
       context.firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       context.firebase.auth.GithubAuthProvider.PROVIDER_ID,
@@ -47,7 +47,7 @@ const Auth = () => {
       axios
         .post(`${url}/auth/sendToken`, { token })
         .then(res => sendProfiletoContext(res.data))
-        .then(history.push("/profile"))
+        .then(history.push('/profile'))
         // automatic redirect not working idk why
         // .then(setTimeout(history.push("/profile"), 500))
         .catch(err => console.log(err));
@@ -71,20 +71,27 @@ const Auth = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className={`twelve columns ${styles.loginContainer}`}>
-          <div>
-            <h1>Login</h1>
-            <StyledFirebaseAuth
-              uiConfig={uiConfig}
-              firebaseAuth={context.firebase.auth()}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <StyledFirebaseAuth
+      uiConfig={uiConfig}
+      firebaseAuth={context.firebase.auth()}
+    />
   );
+
+  // return (
+  //   <div className="container">
+  //     <div className="row">
+  //       <div className={`twelve columns ${styles.loginContainer}`}>
+  //         <div>
+  //           <h1>Login</h1>
+  //           <StyledFirebaseAuth
+  //             uiConfig={uiConfig}
+  //             firebaseAuth={context.firebase.auth()}
+  //           />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default Auth;
