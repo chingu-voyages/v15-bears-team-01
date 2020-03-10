@@ -1,13 +1,9 @@
-import React, { useReducer, useEffect } from "react";
-import AuthContext from "../utils/auth_context";
-import { authReducer, initialState } from "../store/reducers/auth_reducer";
-import { saveUserAction, Logout } from "../store/actions/actions";
-import firebase from "firebase/app";
-import "firebase/auth";
-
-
-
-
+import React, { useReducer, useEffect } from 'react';
+import AuthContext from '../utils/auth_context';
+import { authReducer, initialState } from '../store/reducers/auth_reducer';
+import { saveUserAction, Logout } from '../store/actions/actions';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
