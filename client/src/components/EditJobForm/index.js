@@ -1,24 +1,16 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../../utils/auth_context";
 import { Formik } from "formik";
-import * as Yup from "yup";
-import styles from "./editjobform.module.css";
 import axios from "axios";
+import DatePicker from "react-datepicker";
 
-const EditJobSchema = Yup.object().shape({
-  position: Yup.string()
-    .min(3, "Position must be at least 3 characters")
-    .max(50, "Position Name Too Long")
-    .required("Position Required"),
-  company: Yup.string(),
-  status: Yup.string(),
-  date_applied: Yup.string(),
-  point_of_contact: Yup.string(),
-  poc_email: Yup.string(),
-  poc_phone: Yup.string(),
-  location: Yup.string(),
-  notes: Yup.string()
-});
+import {
+  formValidationSchema as EditJobSchema,
+  formFields
+} from "../../utils/job_form_snippets";
+import "react-datepicker/dist/react-datepicker.css";
+import styles from "./editjobform.module.css";
 
 const user = {
   email: "mock@email.com",
@@ -27,32 +19,17 @@ const user = {
 };
 
 const EditJobForm = ({ job }) => {
-  const { id, position } = job;
+  const { id } = job;
   const [loading, setLoading] = useState(false);
   const [resMessage, setresMessage] = useState(null);
   const context = useContext(AuthContext);
 
-  console.log(id, position);
-
   const handleSubmit = values => {
     setLoading(true);
-    // const data = {
-    //   position,
-    //   company,
-    //   status,
-    //   date_applied,
-    //   point_of_contact,
-    //   poc_email,
-    //   poc_phone,
-    //   location,
-    //   notes
-    // };
-
-    let position = values.position;
 
     let data = {
       user_id: user.id,
-      position
+      ...values
     };
 
     let handleRes = res => {
@@ -86,7 +63,10 @@ const EditJobForm = ({ job }) => {
       )}
       <h3>{resMessage}</h3>
       <Formik
-        initialValues={{ position }}
+        initialValues={{
+          ...job,
+          date_applied: new Date(Date.parse(job.date_applied))
+        }}
         validationSchema={EditJobSchema}
         onSubmit={handleSubmit}
       >
@@ -97,28 +77,98 @@ const EditJobForm = ({ job }) => {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
+          isSubmitting,
+          setFieldValue
         }) => (
           <form className={styles.form} onSubmit={handleSubmit}>
-            <label htmlFor="position">Position:</label>
-            <input
-              className={styles.form_input}
-              name="position"
-              id="position"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.position}
-            />
-            {errors.position && touched.position && (
-              <span className={styles.error_text}>{errors.position} </span>
-            )}
-            <button
-              type="submit"
-              className={styles.form_button}
-              disabled={isSubmitting}
-            >
-              Submit
-            </button>
+            {formFields.map((field, index) => (
+              <React.Fragment key={index}>
+                <label className={styles.input_label} htmlFor={field.name}>
+                  {field.labelInnerText}
+                </label>
+                {/* Syntax below means that the switch function is defined, then immediately executed. */}
+                {(() => {
+                  switch (field.type) {
+                    case "input":
+                      return (
+                        <input
+                          className={styles.form_input}
+                          name={field.name}
+                          id={field.name}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values[field.name]}
+                        />
+                      );
+
+                    case "date":
+                      return (
+                        <DatePicker
+                          className={
+                            styles.form_input + " " + styles.form_date_picker
+                          }
+                          selected={values[field.name]}
+                          name={field.name}
+                          id={field.name}
+                          onChange={date => setFieldValue(field.name, date)}
+                        />
+                      );
+
+                    case "select":
+                      const options = field.options.map((option, index) => (
+                        <option value={option} key={index}>
+                          {option}
+                        </option>
+                      ));
+
+                      return (
+                        <select
+                          id={field.name}
+                          name={field.name}
+                          value={values[field.name]}
+                          onChange={handleChange}
+                        >
+                          {options}
+                        </select>
+                      );
+
+                    case "textarea":
+                      return (
+                        <textarea
+                          id={field.name}
+                          name={field.name}
+                          value={values[field.name]}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      );
+
+                    default:
+                      return <>Error rendering form input.</>;
+                  }
+                })()}
+                <div className={styles.error_container}>
+                  {errors[field.name] && touched[field.name] && (
+                    <span className={styles.error_text}>
+                      {errors[field.name]}
+                    </span>
+                  )}
+                </div>
+              </React.Fragment>
+            ))}
+
+            <div className={styles.form_buttons}>
+              <button
+                type="submit"
+                className={styles.form_button}
+                disabled={isSubmitting}
+              >
+                Submit
+              </button>
+              <Link to="/profile" className={styles.form_button}>
+                Cancel
+              </Link>
+            </div>
           </form>
         )}
       </Formik>

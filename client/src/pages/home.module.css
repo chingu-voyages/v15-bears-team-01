@@ -1,20 +1,20 @@
 @media screen and (min-width: 1px) {
-  .home-vector {
+  .home_vector {
     width: 100%;
     height: 100%;
   }
 
-  .home-row1 {
+  .home_row1 {
     display: flex;
     flex-direction: row;
   }
 
-  .home-image {
+  .home_image {
     width: 80%;
     height: 80%;
   }
 
-  .home-col1 {
+  .home_col1 {
     display: flex;
     width: 40%;
     flex-direction: column;
@@ -24,7 +24,7 @@
     padding-bottom: 150px;
   }
 
-  .home-col2 {
+  .home_col2 {
     display: flex;
     width: 60%;
     flex-direction: row;
@@ -36,7 +36,7 @@
     margin: auto;
   }
 
-  .card-row1 {
+  .card_row1 {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -56,15 +56,15 @@
     background-color: aqua;
   }
 
-  .card-title {
+  .card_title {
     padding: 15px;
   }
 
-  .card-content {
+  .card_content {
     padding: 15px;
   }
 
-  .card-wave {
+  .card_wave {
     width: 100%;
     height: 100%;
     align-self: flex-end;
@@ -72,8 +72,49 @@
     margin-bottom: -120px;
   }
 
-  /* On mouse-over, add a deeper shadow */
-  .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  .landing {
+    background-color: #6d6afc;
+    color: whitesmoke;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
+      sans-serif;
   }
+
+  .callToAction {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    color: whitesmoke;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .callToAction h1 {
+    font-size: 8rem;
+    margin-bottom: 50px;
+    font-weight: bold;
+  }
+  .callToAction h4 {
+    margin-bottom: 65px;
+    font-weight: 300;
+  }
+
+  .getStarted {
+    border-radius: 100px;
+    background-color: #9fbaff;
+    padding: 15px 48px;
+    cursor: pointer;
+    border: none;
+    color: whitesmoke;
+    text-decoration: none;
+    transition: all 0.25s;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .getStarted:hover {
+    color: white;
+    background-color: navy;
+  }
+
+  /* On mouse-over, add a deeper shadow */
 }

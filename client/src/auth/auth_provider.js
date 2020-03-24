@@ -1,19 +1,16 @@
-import React, { useReducer, useEffect } from "react";
-import AuthContext from "../utils/auth_context";
-import { authReducer, initialState } from "../store/reducers/auth_reducer";
-import { saveUserAction, Logout } from "../store/actions/actions";
-import firebase from "firebase/app";
-import "firebase/auth";
-
-
-
-
+import React, { useReducer, useEffect } from 'react';
+import AuthContext from '../utils/auth_context';
+import { authReducer, initialState } from '../store/reducers/auth_reducer';
+import { saveUserAction, Logout } from '../store/actions/actions';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_DOMAIN
 };
 
+console.log(config);
 firebase.initializeApp(config);
 
 const AuthProvider = ({ children }) => {
@@ -23,6 +20,7 @@ const AuthProvider = ({ children }) => {
     if (!firebase.apps.length) {
       firebase.initializeApp(config);
     }
+    console.log(firebase);
   }, []); // eslint-disable-line
 
   //logs in user and saves to global store

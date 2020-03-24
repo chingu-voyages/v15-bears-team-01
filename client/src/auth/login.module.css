@@ -1,0 +1,11 @@
+.loginContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContainer h1 {
+  margin-bottom: 50px;
+  font-weight: 400;
+}
