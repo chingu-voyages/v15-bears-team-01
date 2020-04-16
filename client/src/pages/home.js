@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import AuthContext from "../utils/auth_context";
 
+
+
+
 const Home = () => {
   const context = useContext(AuthContext);
   return (

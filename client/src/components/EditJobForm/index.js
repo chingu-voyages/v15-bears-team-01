@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../../utils/auth_context";
 import { Formik } from "formik";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 
-import { formValidationSchema as EditJobSchema, formFields } from "../../utils/job_form_snippets";
+import {
+  formValidationSchema as EditJobSchema,
+  formFields
+} from "../../utils/job_form_snippets";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./editjobform.module.css";
 
@@ -79,7 +83,9 @@ const EditJobForm = ({ job }) => {
           <form className={styles.form} onSubmit={handleSubmit}>
             {formFields.map((field, index) => (
               <React.Fragment key={index}>
-                <label className={styles.input_label} htmlFor={field.name}>{field.labelInnerText}</label>
+                <label className={styles.input_label} htmlFor={field.name}>
+                  {field.labelInnerText}
+                </label>
                 {/* Syntax below means that the switch function is defined, then immediately executed. */}
                 {(() => {
                   switch (field.type) {
@@ -98,7 +104,9 @@ const EditJobForm = ({ job }) => {
                     case "date":
                       return (
                         <DatePicker
-                          className={styles.form_input + ' ' + styles.form_date_picker}
+                          className={
+                            styles.form_input + " " + styles.form_date_picker
+                          }
                           selected={values[field.name]}
                           name={field.name}
                           id={field.name}
@@ -148,13 +156,19 @@ const EditJobForm = ({ job }) => {
                 </div>
               </React.Fragment>
             ))}
-            <button
-              type="submit"
-              className={styles.form_button}
-              disabled={isSubmitting}
-            >
-              Submit
-            </button>
+
+            <div className={styles.form_buttons}>
+              <button
+                type="submit"
+                className={styles.form_button}
+                disabled={isSubmitting}
+              >
+                Submit
+              </button>
+              <Link to="/profile" className={styles.form_button}>
+                Cancel
+              </Link>
+            </div>
           </form>
         )}
       </Formik>

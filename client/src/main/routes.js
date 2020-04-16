@@ -7,13 +7,16 @@ import {
 } from "react-router-dom";
 
 import Header from "../components/Header";
-import Home from "../pages/home";
+import AddJob from "../pages/addjob";
 import Profile from "../pages/profile";
-import About from "../pages/about";
+
 import Login from "../pages/login";
 import EditJob from "../pages/editjob";
+import LandingPage from "../pages/landing";
 
 import AuthContext from "../utils/auth_context";
+import AddJobForm from "../components/AddJobForm";
+import JobDetails from "../pages/jobdetails";
 
 const Routes = () => {
   const context = useContext(AuthContext);
@@ -37,17 +40,17 @@ const Routes = () => {
         <Header />
 
         <Switch>
-          <Route path="/about" component={About} />
-          {/* <PrivateRoute
+          <PrivateRoute
             path="/profile"
             auth={context.state.isAuthenticated}
             component={Profile}
-          /> */}
-          <Route path="/profile" component={Profile} />
+          />
+          {/* <Route path="/profile" component={Profile} /> */}
           <Route path="/editjob/:id" component={EditJob} />
-
+          <Route path="/job/:id" component={JobDetails} />
           <Route path="/login" component={Login} />
-          <Route path="/" component={Home} />
+          <Route path="/add-job" component={AddJob} />
+          <Route path="/" component={LandingPage} />
         </Switch>
       </div>
     </Router>
